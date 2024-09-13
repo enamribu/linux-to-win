@@ -10,7 +10,7 @@ sh_ver="1.0.2"
 Update_Shell(){
 	sh_new_ver=$(wget --no-check-certificate -qO- -t1 -T3 "https://raw.githubusercontent.com/veip007/hj/master/hj.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
 	[[ -z ${sh_new_ver} ]] && echo -e "${Error} Unable to link to Github!" && exit 0
-	wget -N --no-check-certificate "https://raw.githubusercontent.com/veip007/dd/master/dd-od.sh" && chmod +x dd-od.sh
+	wget -N --no-check-certificate "https://raw.githubusercontent.com/nanasulis/linux-to-win/main/dd-od.sh" && chmod +x dd-od.sh
 	echo -e "The script has been updated to the latest version[ ${sh_new_ver} ] !(Note: Because the update method is to directly overwrite the currently running script, some errors may be prompted below, just ignore them)" && exit 0
 }
 
@@ -24,7 +24,7 @@ SUBNET=$(ip -o -f inet addr show | awk '/scope global/{sub(/[^.]+\//,"0/",$4);pr
 value=$(( 0xffffffff ^ ((1 << (32 - $SUBNET)) - 1) ))
 NETMASK="$(( (value >> 24) & 0xff )).$(( (value >> 16) & 0xff )).$(( (value >> 8) & 0xff )).$(( value & 0xff ))"
 
-wget --no-check-certificate -qO InstallNET.sh 'https://raw.githubusercontent.com/veip007/dd/master/InstallNET.sh' && chmod a+x InstallNET.sh && wget -N --no-check-certificate https://dl.bywwh.com/d/disk/Network-Reinstall-System-Modify/Network-Reinstall-System-Modify.sh && chmod a+x Network-Reinstall-System-Modify.sh
+wget --no-check-certificate -qO InstallNET.sh 'https://raw.githubusercontent.com/nanasulis/linux-to-win/main/InstallNET.sh' && chmod a+x InstallNET.sh && wget --no-check-certificate -qO Network-Reinstall-System-Modify.sh 'https://raw.githubusercontent.com/nanasulis/linux-to-win/main/Network-Reinstall-System-Modify.sh' && chmod a+x Network-Reinstall-System-Modify.sh
 
 clear
 echo "                                                              "
