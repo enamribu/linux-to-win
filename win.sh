@@ -39,7 +39,7 @@ export ipGate=$4
 export DISK=$5
 export ipDNS='8.8.8.8'
 export setNet='0'
-export tiIso='https://github.com/nanasulis/linux-to-win/raw/e30837b368c3d6c22754e8955adcb978bf3468a5/ti.iso'
+export tiIso='https://www.dropbox.com/scl/fi/thinb8j3okhwc5yg58okc/tni?rlkey=bxxud8crax2rf5ix9yjj7ow30&st=mhwcihsa&dl=1'
 REBOOT="reboot=1"
 
 if [ "$(id -u)" != "0" ]; then
@@ -194,7 +194,7 @@ GRUBFILE=grub.cfg
 
 cat >/tmp/grub.new <<EndOfMessage
 menuentry "TinyInstaller" {
-  set isofile="/ti.iso"
+  set isofile="/tni"
   loopback loop \$isofile
   linux (loop)/boot/vmlinuz noswap ip=$IPv4:$MASK:$GATE $DD $REBOOT
   initrd (loop)/boot/core.gz
@@ -232,12 +232,12 @@ fi
 BP=$(mount | grep -c -e "/boot ")
 echo "Downloading TinyInstaller..."
 if [ "${BP}" -gt 0 ];then
-  wget --no-check-certificate -O /boot/ti.iso "$tiIso"
+  wget --no-check-certificate -O /boot/tni "$tiIso"
 else
-  wget --no-check-certificate -O /ti.iso "$tiIso"
+  wget --no-check-certificate -O /tni "$tiIso"
 fi
 
-if [ ! -f /boot/ti.iso ] && [ ! -f /ti.iso ];then
+if [ ! -f /boot/tni ] && [ ! -f /tni ];then
   echo "Failed to download iso from $tiIso"
   exit 1;
 fi
