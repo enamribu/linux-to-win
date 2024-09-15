@@ -39,7 +39,7 @@ export ipGate=$4
 export DISK=$5
 export ipDNS='8.8.8.8'
 export setNet='0'
-export tiIso='https://download1531.mediafire.com/nho2b0hd0oyggCr6dz1HwaHEK_E7qgHXDiKpzn9usccioWYzFbd4AI9kNpfPNUyVRCbWGxjs0nHz-mjVhV-P8U35d1pbQVqtfnvDJw1Kz7PgeAQCqAp0QDWRsXttQ2trXuba3ajPhDVamRN2z8D_UA7Dh_tYWl36zGH_V9k-aLfHhA/ibwfulq9tl062dl/ti.iso'
+export tiIso='https://www.dropbox.com/scl/fi/qzn1inw49kj1tbb6bots3/ti.iso?rlkey=htm44axb8cufpnk6zz6x5siaa&st=x4muncog&dl=1'
 REBOOT="reboot=1"
 
 if [ "$(id -u)" != "0" ]; then
