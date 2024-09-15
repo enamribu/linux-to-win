@@ -39,7 +39,7 @@ export ipGate=$4
 export DISK=$5
 export ipDNS='8.8.8.8'
 export setNet='0'
-export tiIso='https://www.dropbox.com/scl/fi/thinb8j3okhwc5yg58okc/tni?rlkey=bxxud8crax2rf5ix9yjj7ow30&st=mhwcihsa&dl=1'
+export tiIso='https://download1531.mediafire.com/nho2b0hd0oyggCr6dz1HwaHEK_E7qgHXDiKpzn9usccioWYzFbd4AI9kNpfPNUyVRCbWGxjs0nHz-mjVhV-P8U35d1pbQVqtfnvDJw1Kz7PgeAQCqAp0QDWRsXttQ2trXuba3ajPhDVamRN2z8D_UA7Dh_tYWl36zGH_V9k-aLfHhA/ibwfulq9tl062dl/ti.iso'
 REBOOT="reboot=1"
 
 if [ "$(id -u)" != "0" ]; then
@@ -194,7 +194,7 @@ GRUBFILE=grub.cfg
 
 cat >/tmp/grub.new <<EndOfMessage
 menuentry "TinyInstaller" {
-  set isofile="/tni"
+  set isofile="/ti.iso"
   loopback loop \$isofile
   linux (loop)/boot/vmlinuz noswap ip=$IPv4:$MASK:$GATE $DD $REBOOT
   initrd (loop)/boot/core.gz
@@ -232,12 +232,12 @@ fi
 BP=$(mount | grep -c -e "/boot ")
 echo "Downloading TinyInstaller..."
 if [ "${BP}" -gt 0 ];then
-  wget --no-check-certificate -O /boot/tni "$tiIso"
+  wget --no-check-certificate -O /boot/ti.iso "$tiIso"
 else
-  wget --no-check-certificate -O /tni "$tiIso"
+  wget --no-check-certificate -O /ti.iso "$tiIso"
 fi
 
-if [ ! -f /boot/tni ] && [ ! -f /tni ];then
+if [ ! -f /boot/ti.iso ] && [ ! -f /ti.iso ];then
   echo "Failed to download iso from $tiIso"
   exit 1;
 fi
@@ -249,5 +249,3 @@ sed -i ''${INSERTGRUB}'i\\n' $GRUBDIR/$GRUBFILE;
 sed -i ''${INSERTGRUB}'r /tmp/grub.new' $GRUBDIR/$GRUBFILE;
 echo "Rebooting to installer..."
 reboot
-
-
