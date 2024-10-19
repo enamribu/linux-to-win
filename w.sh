@@ -1,12 +1,12 @@
 #!/bin/bash
 
 echo "Pilih OS yang ingin anda install"
-echo "	1) Windows 2019(Default)"
+echo "	1) Windows 2012(Default)"
 echo "	2) Windows 2016"
-echo "	3) Windows 2012"
-echo "	4) Windows 10"
-echo "	5) Windows 2022"
-echo "	6) Pakai link gz mu sendiri"
+echo "	3) Windows 2019"
+echo "	4) Windows 2022"
+echo "	5) Windows 10"
+echo "	6) Link GZ"
 
 read -p "Pilih [1]: " PILIHOS
 
