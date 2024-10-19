@@ -18,7 +18,6 @@ case "$LINK" in
 	4) LINK='http://139.59.227.187/windows2022.gz' ;;
 	5) LINK='http://139.59.227.187/windows10.gz' ;;
 	6) read -p "Masukkan Link GZ : " LINK ;;
-	*) echo "pilihan salah"; exit;;
 esac
 
 wget -O reinstall.sh https://raw.githubusercontent.com/bin456789/reinstall/refs/heads/main/reinstall.sh && bash reinstall.sh dd --img $LINK
