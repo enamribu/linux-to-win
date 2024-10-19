@@ -23,6 +23,4 @@ esac
 
 wget -O reinstall.sh https://raw.githubusercontent.com/bin456789/reinstall/refs/heads/main/reinstall.sh && bash reinstall.sh dd --img $LINK
 
-echo 'Your server will reboot in 3 second'
-sleep 3
 reboot
