@@ -16,7 +16,7 @@ case $N in
   3) bash reinstall.sh dd --img 'http://139.59.227.187/windows2019.gz' ;;
   4) bash reinstall.sh dd --img 'http://139.59.227.187/windows2022.gz' ;;
   5) bash reinstall.sh dd --img 'http://139.59.227.187/windows10.gz' ;;
-  6) echo " Masukkan Link : " $LINK bash reinstall.sh dd --img $LINK  ;;
+  6) echo " Masukkan Link : " ;;
   *) echo "Wrong input!" ;;
 esac
 
