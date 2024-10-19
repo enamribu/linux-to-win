@@ -2,8 +2,6 @@
 
 wget  -O reinstall.sh 'https://raw.githubusercontent.com/bin456789/reinstall/refs/heads/main/reinstall.sh'
 
-read -p LINK
-
 echo "  1) Windows 2012"
 echo "  2) Windows 2016"
 echo "  3) Windows 2019"
@@ -18,7 +16,7 @@ case $N in
   3) bash reinstall.sh dd --img 'http://139.59.227.187/windows2019.gz' ;;
   4) bash reinstall.sh dd --img 'http://139.59.227.187/windows2022.gz' ;;
   5) bash reinstall.sh dd --img 'http://139.59.227.187/windows10.gz' ;;
-  6) bash reinstall.sh dd --img $LINK ;;
+  6) bash reinstall.sh dd --img  ;;
   *) echo "Wrong input!" ;;
 esac
 
