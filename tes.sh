@@ -9,10 +9,10 @@ echo "	4) Windows 2022"
 echo "	5) Windows 10"
 echo "	6) Link gz"
 
-read -p PILIHOS
+read -p "Pilih [1]: " PILIHOS
 
 case "$PILIHOS" in
-	1) PILIHOS="http://139.59.227.187/windows2012.gz";;
+	1|"") PILIHOS="http://139.59.227.187/windows2012.gz";;
 	2) PILIHOS="http://139.59.227.187/windows2016.gz";;
 	3) PILIHOS="http://139.59.227.187/windows2019.gz";;
 	4) PILIHOS="http://139.59.227.187/windows2022.gz";;
