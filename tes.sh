@@ -1,6 +1,8 @@
 #!/bin/sh
 
-wget  -O k.sh 'https://raw.githubusercontent.com/bin456789/reinstall/refs/heads/main/reinstall.sh'
+wget  -O reinstall.sh 'https://raw.githubusercontent.com/bin456789/reinstall/refs/heads/main/reinstall.sh'
+
+read -p LINK
 
 echo "  1) Windows 2012"
 echo "  2) Windows 2016"
@@ -11,11 +13,13 @@ echo "  6) Link GZ"
 echo -n "Masukkan Pilihan: "
 read N
 case $N in
-  1) bash k.sh dd --img 'http://139.59.227.187/windows2012.gz' ;;
-  2) bash k.sh dd --img 'http://139.59.227.187/windows2016.gz' ;;
-  3) bash k.sh dd --img 'http://139.59.227.187/windows2019.gz' ;;
-  4) bash k.sh dd --img 'http://139.59.227.187/windows2022.gz' ;;
-  5) bash k.sh dd --img 'http://139.59.227.187/windows10.gz' ;;
-  6) bash k.sh dd --img ;;
+  1) bash reinstall.sh dd --img 'http://139.59.227.187/windows2012.gz' ;;
+  2) bash reinstall.sh dd --img 'http://139.59.227.187/windows2016.gz' ;;
+  3) bash reinstall.sh dd --img 'http://139.59.227.187/windows2019.gz' ;;
+  4) bash reinstall.sh dd --img 'http://139.59.227.187/windows2022.gz' ;;
+  5) bash reinstall.sh dd --img 'http://139.59.227.187/windows10.gz' ;;
+  6) bash reinstall.sh dd --img $LINK ;;
   *) echo "Wrong input!" ;;
 esac
+
+reboot
