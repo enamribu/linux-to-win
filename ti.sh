@@ -21,3 +21,5 @@ case "$PILIHOS" in
 esac
 
 wget  -O reinstall.sh 'https://raw.githubusercontent.com/bin456789/reinstall/refs/heads/main/reinstall.sh' && bash reinstall.sh dd --img $PILIHOS
+
+reboot
