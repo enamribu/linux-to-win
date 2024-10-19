@@ -9,7 +9,7 @@ echo "	4) Windows 2022"
 echo "	5) Windows 10"
 echo "	6) Link gz"
 
-read -p LINK
+read -p LINK : 
 
 case "$LINK" in
 	1) LINK='http://139.59.227.187/windows2012.gz' ;;
