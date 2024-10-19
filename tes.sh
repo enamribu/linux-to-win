@@ -19,3 +19,4 @@ case $N in
   6) bash reinstall.sh dd --img 'Masukkan Link' ;;
   *) echo "Wrong input!" ;;
 esac
+reboot
