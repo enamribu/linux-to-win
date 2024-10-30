@@ -20,6 +20,6 @@ case "$PILIHOS" in
 	*) echo "pilihan salah"; exit;;
 esac
 
-wget  -O reinstall.sh 'https://raw.githubusercontent.com/enamribu/install/refs/heads/main/reinstall.sh' && bash reinstall.sh dd --img $PILIHOS
+wget  -O reinstall.sh 'https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh' && bash reinstall.sh dd --img $PILIHOS
 
 reboot
