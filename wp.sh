@@ -20,7 +20,7 @@ case "$PILIHOS" in
 	*) echo "Pilihan salah"; exit;;
 esac
 
-read -p "Masukkan port yang ingin digunakan (default 3389): " PORT
+read -p "Masukkan port (default 3389): " PORT
 PORT=${PORT:-3389}
 
 echo "Mengunduh dan menjalankan reinstall.sh dengan port $PORT..."
