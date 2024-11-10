@@ -27,11 +27,11 @@ echo "	2) TIDAK"
 read -p "Pilih : " PORT
 
 case "$PILIHOS" in
-	1|"") read -p "Masukkan PORT : " PORT;;
-	2) wget  -O reinstall.sh 'https://raw.githubusercontent.com/bin456789/reinstall/refs/heads/main/reinstall.sh' && bash reinstall.sh dd --img $PILIHOS
+	1) read -p "Masukkan PORT : " PORT;;
+	2) wget -O reinstall.sh 'https://raw.githubusercontent.com/bin456789/reinstall/refs/heads/main/reinstall.sh' && bash reinstall.sh dd --img $PILIHOS
 	*) echo "pilihan salah"; exit;;
 esac
 
-wget  -O reinstall.sh 'https://raw.githubusercontent.com/bin456789/reinstall/refs/heads/main/reinstall.sh' && bash reinstall.sh dd --img $PILIHOS --rdp-port $PORT
+wget -O reinstall.sh 'https://raw.githubusercontent.com/bin456789/reinstall/refs/heads/main/reinstall.sh' && bash reinstall.sh dd --img $PILIHOS --rdp-port $PORT
 
 reboot
