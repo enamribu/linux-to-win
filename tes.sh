@@ -35,6 +35,6 @@ echo "OS yang dipilih: $PILIHOS"
 echo "Port yang dipilih: $PORT"
 
 # Mengunduh dan menjalankan script reinstall
-wget  -O reinstall.sh 'https://raw.githubusercontent.com/bin456789/reinstall/refs/heads/main/reinstall.sh' && bash reinstall.sh dd --img $PILIHOS --rdp-port $ADDPORT
+wget  -O reinstall.sh 'https://raw.githubusercontent.com/bin456789/reinstall/refs/heads/main/reinstall.sh' && bash reinstall.sh dd --img $PILIHOS --rdp-port $PORT
 
 reboot
