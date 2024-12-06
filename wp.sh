@@ -24,7 +24,7 @@ read -p "Masukkan port (default 3389): " PORT
 PORT=${PORT:-3389}
 
 echo "Mengunduh dan menjalankan reinstall.sh dengan port $PORT..."
-wget -O reinstall.sh 'https://raw.githubusercontent.com/bin456789/reinstall/refs/heads/main/reinstall.sh' && bash reinstall.sh dd --img $PILIHOS --rdp-port $PORT
+wget -O reinstall.sh 'https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh' && bash reinstall.sh dd --img $PILIHOS --rdp-port $PORT
 
 echo "Restarting..."
 reboot
