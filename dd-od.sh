@@ -7,7 +7,7 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 # Tentukan lokasi file .gz yang berisi image Windows (IMG)
-GZ_FILE="/root/windows.gz"
+GZ_FILE="windows.gz"
 # Tentukan lokasi disk tujuan (misalnya USB /dev/sdX)
 TARGET_DISK="/dev/vda"
 
