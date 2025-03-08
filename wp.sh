@@ -12,12 +12,12 @@ echo "	7) Link GZ"
 read -p "Pilih : " PILIHOS
 
 case "$PILIHOS" in
-	1|"") PILIHOS="http://165.227.125.198/windows2012.gz"  IFACE="Ethernet Instance 0 2";;
-	2) PILIHOS="http://165.227.125.198/windows2016.gz"  IFACE="Ethernet Instance 0 2";;
-	3) PILIHOS="http://165.227.125.198/windows2019.gz"  IFACE="Ethernet";;
-	4) PILIHOS="http://165.227.125.198/windows2022.gz"  IFACE="Ethernet Instance 0 2";;
-	5) PILIHOS="http://165.227.125.198/windows10.gz"  IFACE="Ethernet Instance 0 2";;
- 	6) PILIHOS="http://165.227.125.198/windows11.gz"  IFACE="Ethernet Instance 0 2";;
+	1|"") PILIHOS="http://143.198.210.138/windows2012.gz"  IFACE="Ethernet Instance 0 2";;
+	2) PILIHOS="http://143.198.210.138/windows2016.gz"  IFACE="Ethernet Instance 0 2";;
+	3) PILIHOS="http://143.198.210.138/windows2019.gz"  IFACE="Ethernet";;
+	4) PILIHOS="http://143.198.210.138/windows2022.gz"  IFACE="Ethernet Instance 0 2";;
+	5) PILIHOS="http://143.198.210.138/windows10.gz"  IFACE="Ethernet Instance 0 2";;
+ 	6) PILIHOS="http://143.198.210.138/windows11.gz"  IFACE="Ethernet Instance 0 2";;
 	7) read -p "Masukkan Link GZ : " PILIHOS;;
 	*) echo "Pilihan salah"; exit;;
 esac
