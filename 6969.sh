@@ -1,25 +1,68 @@
 #!/bin/bash
 
-echo "Pilih OS yang ingin anda install"
-echo "	1) Windows 2012"
-echo "	2) Windows 2016"
-echo "	3) Windows 2019"
-echo "	4) Windows 2022"
-echo "	5) Windows 10"
-echo "	6) Link GZ"
+# Pastikan script dijalankan sebagai root
+if [ "$EUID" -ne 0 ]; then
+  echo "Silakan jalankan script ini sebagai root."
+  exit 1
+fi
 
-read -p "Pilih : " PILIHOS
+# Link download file Windows image
+DOWNLOAD_LINK="https://download1654.mediafire.com/54dsryaxmfmgC9HdPW3NzK4XXgAiUUrOi6mYsWWq9ABoF8gr7HfsB1klnU_e6DSVdP3oVZ5ZzH0BfLOvzMwC7wxndx25ccfVvw6DaJl9Tb60JAXzjE16y6Nbnk8E2y69WAFtNn9wqLfexlT4k2Xobd6fMiU4-fAqIrre60qLN_UM3w/4phq67s1vovjnn1/windows2019.gz"  # Ganti dengan link download Anda
 
-case "$PILIHOS" in
-	1|"") PILIHOS="http://139.59.227.187/windows2012.gz"  IFACE="Ethernet Instance 0 2";;
-	2) PILIHOS="http://139.59.227.187/windows2016.gz"  IFACE="Ethernet Instance 0 2";;
-	3) PILIHOS="http://139.59.227.187/windows2019.gz"  IFACE="Ethernet";;
-	4) PILIHOS="http://139.59.227.187/windows2022.gz"  IFACE="Ethernet Instance 0 2";;
-	5) PILIHOS="http://139.59.227.187/windows10.gz"  IFACE="Ethernet Instance 0 2";;
-	6) read -p "Masukkan Link GZ : " PILIHOS;;
-	*) echo "pilihan salah"; exit;;
-esac
+# Lokasi sementara untuk menyimpan file image
+TEMP_IMAGE="/tmp/windows_image.gz"
 
-wget  -O reinstall.sh 'https://raw.githubusercontent.com/bin456789/reinstall/refs/heads/main/reinstall.sh' && bash reinstall.sh dd --img $PILIHOS --rdp-port 6969
+# Temukan disk utama secara otomatis
+TARGET_DISK=$(lsblk -dn -o NAME | head -n 1)
+if [ -z "$TARGET_DISK" ]; then
+  echo "Tidak dapat menemukan disk utama."
+  exit 1
+fi
+TARGET_DISK="/dev/$TARGET_DISK"
 
-reboot
+# Beri peringatan bahwa semua data akan dihapus
+echo "PERINGATAN: Semua data pada disk $TARGET_DISK akan dihapus!"
+read -p "Apakah Anda yakin ingin melanjutkan? (y/n): " CONFIRM
+if [ "$CONFIRM" != "y" ]; then
+  echo "Proses dibatalkan."
+  exit 1
+fi
+
+# Mulai proses
+echo "Menggantikan OS Ubuntu dengan Windows..."
+
+# Download file image Windows
+echo "Mendownload image Windows dari $DOWNLOAD_LINK..."
+if ! wget -O "$TEMP_IMAGE" "$DOWNLOAD_LINK"; then
+  echo "Gagal mendownload file image."
+  exit 1
+fi
+
+# Unmount semua partisi yang terpasang pada disk target
+echo "Unmounting partisi..."
+umount ${TARGET_DISK}* 2>/dev/null
+
+# Tulis image ke disk target
+echo "Menulis image Windows ke disk..."
+if ! gunzip -c "$TEMP_IMAGE" | dd of="$TARGET_DISK" bs=4M status=progress; then
+  echo "Gagal menulis image ke disk."
+  exit 1
+fi
+
+# Install Bootloader Windows (jika diperlukan)
+echo "Menginstal bootloader Windows..."
+if command -v ms-sys >/dev/null 2>&1; then
+  if ! ms-sys --mbr "$TARGET_DISK"; then
+    echo "Gagal menginstal bootloader Windows."
+  fi
+else
+  echo "ms-sys tidak ditemukan. Bootloader Windows mungkin perlu diinstal secara manual."
+fi
+
+# Bersihkan file sementara
+echo "Membersihkan file sementara..."
+rm -f "$TEMP_IMAGE"
+
+# Selesai
+echo "Proses selesai. Silakan reboot VPS Anda."
+echo "Perintah reboot: sudo reboot"
