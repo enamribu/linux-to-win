@@ -25,8 +25,10 @@ esac
 read -p "Masukkan port (default 3389): " PORT
 PORT=${PORT:-3389}
 
-echo "Mengunduh dan menjalankan reinstall.sh dengan port $PORT..."
-curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh && bash reinstall.sh dd --img $PILIHOS --rdp-port $PORT
+read -p "Masukkan password untuk RDP: " PASSWORD
+
+echo "Mengunduh dan menjalankan reinstall.sh dengan port $PORT dan password yang diberikan..."
+curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh && bash reinstall.sh dd --img $PILIHOS --rdp-port $PORT --password "$PASSWORD"
 
 echo "Restarting..."
 reboot
