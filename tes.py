@@ -1,8 +1,5 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
+import requests
+from bs4 import BeautifulSoup
 import subprocess
 
 # Daftar pilihan link
@@ -52,41 +49,41 @@ port = "3389"  # Port default
 if add_port == "y":
     port = input("Masukkan port yang ingin digunakan (default 3389): ").strip() or port
 
-# Konfigurasi Chrome untuk headless mode dan User-Agent
-chrome_options = Options()
-chrome_options.add_argument("--headless")  # Menjalankan browser tanpa antarmuka grafis
-chrome_options.add_argument("--no-sandbox")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--disable-gpu")
-chrome_options.add_argument("--window-size=1920,1080")
-chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+# Fungsi untuk mengambil link download dari halaman MediaFire
+def get_download_link(url):
+    try:
+        # Kirim request ke halaman MediaFire
+        response = requests.get(url)
+        response.raise_for_status()  # Cek apakah request berhasil
 
-# Inisialisasi WebDriver dengan opsi di atas
-driver = webdriver.Chrome(options=chrome_options)
+        # Parse HTML menggunakan BeautifulSoup
+        soup = BeautifulSoup(response.text, 'html.parser')
 
+        # Cari elemen tombol download (sesuaikan dengan struktur halaman MediaFire)
+        download_button = soup.find('a', {'id': 'downloadButton'})
+        if download_button and 'href' in download_button.attrs:
+            return download_button['href']
+        else:
+            raise ValueError("Tombol download tidak ditemukan atau tidak memiliki link.")
+    except Exception as e:
+        print(f"Gagal mengambil link download: {e}")
+        return None
+
+# Ambil link download
+download_link = get_download_link(selected_link)
+if not download_link:
+    print("Tidak dapat melanjutkan karena link download tidak ditemukan.")
+    exit()
+
+# Tampilkan hasil salinan link di terminal
+print("Link download yang disalin:", download_link)
+
+# Eksekusi perintah curl
+curl_command = f"curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh && bash reinstall.sh dd --img {download_link} --rdp-port {port}"
+print("Menjalankan perintah:", curl_command)
+
+# Jalankan perintah curl menggunakan subprocess
 try:
-    # Buka halaman MediaFire dari link yang dipilih
-    driver.get(selected_link)
-    
-    # Tunggu hingga elemen tombol download muncul menggunakan WebDriverWait
-    download_button = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, '//*[@id="downloadButton"]'))
-    )
-    
-    # Ambil nilai atribut 'href' dari elemen tersebut
-    download_link = download_button.get_attribute("href")
-    
-    # Tampilkan hasil salinan link di terminal
-    print("Link download yang disalin:", download_link)
-
-    # Eksekusi perintah curl
-    curl_command = f"curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh && bash reinstall.sh dd --img {download_link} --rdp-port {port}"
-    print("Menjalankan perintah:", curl_command)
-    
-    # Jalankan perintah curl menggunakan subprocess
     subprocess.run(curl_command, shell=True, check=True)
-
-finally:
-    # Tutup browser setelah selesai
-    driver.quit()
-    print("Script selesai dijalankan.")
+except subprocess.CalledProcessError as e:
+    print(f"Gagal menjalankan perintah curl: {e}")
