@@ -13,12 +13,12 @@ while true; do
     read -p "Pilih : " PILIHOS
 
     case "$PILIHOS" in
-        1|"") PILIHOS="http://143.198.210.138/windows2012.gz"  IFACE="Ethernet Instance 0 2"; break;;
-        2) PILIHOS="http://143.198.210.138/windows2016.gz"  IFACE="Ethernet Instance 0 2"; break;;
-        3) PILIHOS="http://143.198.210.138/windows2019.gz"  IFACE="Ethernet"; break;;
-        4) PILIHOS="http://143.198.210.138/windows2022.gz"  IFACE="Ethernet Instance 0 2"; break;;
-        5) PILIHOS="http://143.198.210.138/windows10.gz"  IFACE="Ethernet Instance 0 2"; break;;
-        6) PILIHOS="http://143.198.210.138/windows11.gz"  IFACE="Ethernet Instance 0 2"; break;;
+        1|"") PILIHOS="http://13.229.98.238/windows2012.gz"  IFACE="Ethernet Instance 0 2"; break;;
+        2) PILIHOS="http://13.229.98.238/windows2016.gz"  IFACE="Ethernet Instance 0 2"; break;;
+        3) PILIHOS="http://13.229.98.238/windows2019.gz"  IFACE="Ethernet"; break;;
+        4) PILIHOS="http://13.229.98.238/windows2022.gz"  IFACE="Ethernet Instance 0 2"; break;;
+        5) PILIHOS="http://13.229.98.238/windows10.gz"  IFACE="Ethernet Instance 0 2"; break;;
+        6) PILIHOS="http://13.229.98.238/windows11.gz"  IFACE="Ethernet Instance 0 2"; break;;
         7) 
             read -p "Masukkan Link GZ : " PILIHOS
             if [[ -n $PILIHOS ]]; then
