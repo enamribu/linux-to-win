@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 import subprocess
 
 # Daftar pilihan link
@@ -51,8 +52,17 @@ port = "3389"  # Port default
 if add_port == "y":
     port = input("Masukkan port yang ingin digunakan (default 3389): ").strip() or port
 
-# Inisialisasi WebDriver (misalnya, menggunakan Chrome)
-driver = webdriver.Chrome()
+# Konfigurasi Chrome untuk headless mode dan User-Agent
+chrome_options = Options()
+chrome_options.add_argument("--headless")  # Menjalankan browser tanpa antarmuka grafis
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--disable-gpu")
+chrome_options.add_argument("--window-size=1920,1080")
+chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+
+# Inisialisasi WebDriver dengan opsi di atas
+driver = webdriver.Chrome(options=chrome_options)
 
 try:
     # Buka halaman MediaFire dari link yang dipilih
@@ -77,5 +87,6 @@ try:
     subprocess.run(curl_command, shell=True, check=True)
 
 finally:
-    # Jangan tutup browser, biarkan tetap terbuka
-    print("Script selesai dijalankan. Browser tetap terbuka.")
+    # Tutup browser setelah selesai
+    driver.quit()
+    print("Script selesai dijalankan.")
