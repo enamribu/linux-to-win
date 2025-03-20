@@ -52,15 +52,21 @@ if add_port == "y":
 # Fungsi untuk mengambil link download dari halaman MediaFire
 def get_download_link(url):
     try:
-        # Kirim request ke halaman MediaFire
-        response = requests.get(url)
+        # Header untuk mensimulasikan request dari browser
+        headers = {
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+        }
+
+        # Kirim request ke halaman MediaFire dengan header
+        response = requests.get(url, headers=headers)
         response.raise_for_status()  # Cek apakah request berhasil
 
         # Parse HTML menggunakan BeautifulSoup
         soup = BeautifulSoup(response.text, 'html.parser')
 
         # Cari elemen tombol download (sesuaikan dengan struktur halaman MediaFire)
-        download_button = soup.find('a', {'id': 'downloadButton'})
+        # Di MediaFire, link download biasanya ada di elemen dengan class 'input' atau 'downloadButton'
+        download_button = soup.find('a', {'class': 'input'}) or soup.find('a', {'id': 'downloadButton'})
         if download_button and 'href' in download_button.attrs:
             return download_button['href']
         else:
